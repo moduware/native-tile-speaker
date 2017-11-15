@@ -1,13 +1,13 @@
 {
-  "id": "moduware.tile.template",
-  "name": "Tile Template",
-  "description": "Moduware tile template",
+  "id": "moduware.tile.speaker",
+  "name": "Speaker",
+  "description": "Moduware tile for speaker module",
 
   "version": "0.0.1",
   "changes": "Initial release",
   "minumumAppVersion": "1.0.0",
   "modules": [
-    "nexpaq.module.led"
+    "moduware.module.speaker"
   ],
   
   "title": "Template",

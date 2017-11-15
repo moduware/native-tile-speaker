@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace XamariniOSTileTemplate
+namespace Moduware.Tile.Speaker.iOS
 {
     public class Application
     {
