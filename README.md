@@ -1,2 +1,3 @@
-# native-tile-speaker
-Native tile for moduware speaker module
+# Native Speaker Tile
+Native tile for Moduware speaker module
+
