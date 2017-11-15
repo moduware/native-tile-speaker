@@ -43,29 +43,51 @@ namespace Moduware.Tile.Speaker.Droid
 			}
 		}
 		
+		public partial class Color
+		{
+			
+			// aapt resource value: 0x7f040000
+			public const int titlebackgroundcolor = 2130968576;
+			
+			// aapt resource value: 0x7f040001
+			public const int titletextcolor = 2130968577;
+			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Color()
+			{
+			}
+		}
+		
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040006
-			public const int button1 = 2130968582;
+			// aapt resource value: 0x7f060006
+			public const int button1 = 2131099654;
 			
-			// aapt resource value: 0x7f040000
-			public const int button2 = 2130968576;
+			// aapt resource value: 0x7f060000
+			public const int button2 = 2131099648;
 			
-			// aapt resource value: 0x7f040003
-			public const int editText1 = 2130968579;
+			// aapt resource value: 0x7f060003
+			public const int editText1 = 2131099651;
 			
-			// aapt resource value: 0x7f040004
-			public const int editText2 = 2130968580;
+			// aapt resource value: 0x7f060004
+			public const int editText2 = 2131099652;
 			
-			// aapt resource value: 0x7f040005
-			public const int editText3 = 2130968581;
+			// aapt resource value: 0x7f060005
+			public const int editText3 = 2131099653;
 			
-			// aapt resource value: 0x7f040002
-			public const int linearLayout1 = 2130968578;
+			// aapt resource value: 0x7f060002
+			public const int linearLayout1 = 2131099650;
 			
-			// aapt resource value: 0x7f040001
-			public const int textView1 = 2130968577;
+			// aapt resource value: 0x7f060007
+			public const int myTitle = 2131099655;
+			
+			// aapt resource value: 0x7f060001
+			public const int textView1 = 2131099649;
 			
 			static Id()
 			{
@@ -82,6 +104,9 @@ namespace Moduware.Tile.Speaker.Droid
 			
 			// aapt resource value: 0x7f020000
 			public const int Main = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int mytitle = 2130837505;
 			
 			static Layout()
 			{
@@ -111,6 +136,25 @@ namespace Moduware.Tile.Speaker.Droid
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int WindowTitleBackground = 2131034112;
+			
+			// aapt resource value: 0x7f050001
+			public const int speakerTheme = 2131034113;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
 			{
 			}
 		}

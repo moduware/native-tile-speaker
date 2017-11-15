@@ -13,30 +13,32 @@ using System.Collections.Generic;
 
 namespace Moduware.Tile.Speaker.Droid
 {
-    [Activity(Label = "Tile template", MainLauncher = true, LaunchMode = Android.Content.PM.LaunchMode.SingleInstance)]
-    [IntentFilter(new [] { "android.intent.action.VIEW" }, DataScheme = "moduware.tile.template", Categories = new [] { "android.intent.category.DEFAULT", "android.intent.category.BROWSABLE" })]
+    [Activity(Label = "Speaker", MainLauncher = true, Theme = "@style/speakerTheme", LaunchMode = Android.Content.PM.LaunchMode.SingleInstance)]
+    [IntentFilter(new [] { "android.intent.action.VIEW" }, DataScheme = "moduware.tile.speaker", Categories = new [] { "android.intent.category.DEFAULT", "android.intent.category.BROWSABLE" })]
     public class MainActivity : TileActivity
     {
         private List<string> targetModuleTypes = new List<string>
         {
-            "nexpaq.module.led",
-            "moduware.module.led" // new module type using other kind of LEDs
+            "moduware.module.speaker"
         };
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
+            //ActionBar.SetDisplayHomeAsUpEnabled(true);
             // We need assign Id of our tile here, it is required for proper Dashboard - Tile communication
-            TileId = "moduware.tile.template";
+            TileId = "moduware.tile.speaker";
 
             // Logger to output messages from PlatformCore to console
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.AndroidLog()
                 .CreateLogger();
 
+            Window.RequestFeature(Android.Views.WindowFeatures.CustomTitle);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
+            Window.SetFeatureInt(Android.Views.WindowFeatures.CustomTitle, Resource.Layout.mytitle);
 
             // Binding handlers to UI elements
             var ConfigButton = FindViewById<Button>(Resource.Id.button1);

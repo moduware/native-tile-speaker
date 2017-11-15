@@ -95,6 +95,7 @@ namespace Moduware.Platform.Tile.Droid
         /// </summary>
         public void NotConnectedActions()
         {
+            return; 
             // let user know that there are no connected gateways and it is required to open Moduware app for connection
             Utilities.ShowNotConnectedAlert(() =>
             {
