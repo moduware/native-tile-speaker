@@ -9,6 +9,8 @@
         android:layout_height="fill_parent"
         android:src="@drawable/back_button"
         android:background="@null"
+        android:paddingLeft="20dip"
+        android:paddingRight="35dip"
         android:id="@+id/back_button" />
     <TextView
         android:id="@+id/myTitle"
