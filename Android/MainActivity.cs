@@ -17,6 +17,10 @@ namespace Moduware.Tile.Speaker.Droid
     [IntentFilter(new [] { "android.intent.action.VIEW" }, DataScheme = "moduware.tile.speaker", Categories = new [] { "android.intent.category.DEFAULT", "android.intent.category.BROWSABLE" })]
     public class MainActivity : TileActivity
     {
+        private ImageButton _speakerButton;
+        private Switch _defaultSwitch;
+        private bool _active = false;
+
         private List<string> targetModuleTypes = new List<string>
         {
             "moduware.module.speaker"
@@ -40,30 +44,43 @@ namespace Moduware.Tile.Speaker.Droid
             SetContentView(Resource.Layout.Main);
             Window.SetFeatureInt(Android.Views.WindowFeatures.CustomTitle, Resource.Layout.Header);
 
-            var switchOne = FindViewById<Switch>(Resource.Id.defaultSwitch);
-            switchOne.CheckedChange += (o, e) =>
-            {
-                if (e.IsChecked)
-                {
-                    switchOne.TrackDrawable = GetDrawable(Resource.Mipmap.track_active);
-                    switchOne.ThumbDrawable = GetDrawable(Resource.Mipmap.thumb_active);
-                }
-                else
-                {
-                    switchOne.TrackDrawable = GetDrawable(Resource.Mipmap.track);
-                    switchOne.ThumbDrawable = GetDrawable(Resource.Mipmap.knob);
-                }
-            };
+            _speakerButton = FindViewById<ImageButton>(Resource.Id.speaker_button);
+            _speakerButton.Click += SpeakerButtonClickHandler;
 
-            // Binding handlers to UI elements
-            //var ConfigButton = FindViewById<Button>(Resource.Id.button1);
-            //ConfigButton.Click += ConfigButtonClickHandler;
+            _defaultSwitch = FindViewById<Switch>(Resource.Id.defaultSwitch);
+            _defaultSwitch.CheckedChange += DefaultSwitchStateCheckedChange;
 
             //var DashboardButton = FindViewById<Button>(Resource.Id.button2);
             //DashboardButton.Click += (s, e) => Utilities.OpenDashboard();
 
             // We need to know when core is ready so we can start listening for data from gateways
             CoreReady += CoreReadyHandler;
+        }
+
+        private void DefaultSwitchStateCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
+        {
+            if (e.IsChecked)
+            {
+                _defaultSwitch.TrackDrawable = GetDrawable(Resource.Mipmap.track_active);
+                _defaultSwitch.ThumbDrawable = GetDrawable(Resource.Mipmap.thumb_active);
+            }
+            else
+            {
+                _defaultSwitch.TrackDrawable = GetDrawable(Resource.Mipmap.track);
+                _defaultSwitch.ThumbDrawable = GetDrawable(Resource.Mipmap.knob);
+            }
+        }
+
+        private void SpeakerButtonClickHandler(object sender, EventArgs e)
+        {
+            _active = !_active;
+            if(_active)
+            {
+                _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_on));
+            } else
+            {
+                _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_off));
+            }
         }
 
         private void CoreReadyHandler(Object source, EventArgs e)
