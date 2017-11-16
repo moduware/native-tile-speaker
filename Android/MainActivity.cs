@@ -38,7 +38,7 @@ namespace Moduware.Tile.Speaker.Droid
             Window.RequestFeature(Android.Views.WindowFeatures.CustomTitle);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-            Window.SetFeatureInt(Android.Views.WindowFeatures.CustomTitle, Resource.Layout.mytitle);
+            Window.SetFeatureInt(Android.Views.WindowFeatures.CustomTitle, Resource.Layout.Header);
 
             // Binding handlers to UI elements
             var ConfigButton = FindViewById<Button>(Resource.Id.button1);
