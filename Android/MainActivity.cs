@@ -44,14 +44,14 @@ namespace Moduware.Tile.Speaker.Droid
             SetContentView(Resource.Layout.Main);
             Window.SetFeatureInt(Android.Views.WindowFeatures.CustomTitle, Resource.Layout.Header);
 
+            var backButton = FindViewById<ImageButton>(Resource.Id.back_button);
+            backButton.Click += (o, e) => Utilities.OpenDashboard();
+
             _speakerButton = FindViewById<ImageButton>(Resource.Id.speaker_button);
             _speakerButton.Click += SpeakerButtonClickHandler;
 
             _defaultSwitch = FindViewById<Switch>(Resource.Id.defaultSwitch);
             _defaultSwitch.CheckedChange += DefaultSwitchStateCheckedChange;
-
-            //var DashboardButton = FindViewById<Button>(Resource.Id.button2);
-            //DashboardButton.Click += (s, e) => Utilities.OpenDashboard();
 
             // We need to know when core is ready so we can start listening for data from gateways
             CoreReady += CoreReadyHandler;
