@@ -11,8 +11,8 @@
     "moduware.module.speaker"
   ],
   
-  "title": "Template",
-  "color": "deepskyblue",
+  "title": "Speaker",
+  "color": "#DF5250",
   "textColor": "white",
 
   "type": "native",
