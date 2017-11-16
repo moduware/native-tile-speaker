@@ -13,8 +13,6 @@ using Android.Widget;
 namespace Moduware.Tile.Speaker.Droid
 {
     [Activity(Label = "Speaker", Theme = "@style/SplashTheme", MainLauncher = true)]
-    //[IntentFilter(new { "android.intent.action.MAIN" })]
-    ///[IntentFilter(new { "android.intent.category.LAUNCHER" })]
     public class SplashActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

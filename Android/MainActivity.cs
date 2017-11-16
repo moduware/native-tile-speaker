@@ -14,7 +14,7 @@ using System.Collections.Generic;
 namespace Moduware.Tile.Speaker.Droid
 {
     [Activity(Label = "Speaker", Theme = "@style/speakerTheme", LaunchMode = Android.Content.PM.LaunchMode.SingleInstance)]
-    [IntentFilter(new [] { "android.intent.action.VIEW" }, DataScheme = "moduware.tile.speaker", Categories = new [] { "android.intent.category.DEFAULT", "android.intent.category.BROWSABLE" })]
+    [IntentFilter(new[] { "android.intent.action.VIEW" }, DataScheme = "moduware.tile.speaker", Categories = new[] { "android.intent.category.DEFAULT", "android.intent.category.BROWSABLE" })]
     public class MainActivity : TileActivity
     {
         private ImageButton _speakerButton;
