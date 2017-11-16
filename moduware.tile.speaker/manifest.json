@@ -7,6 +7,7 @@
   "changes": "Initial release",
   "minumumAppVersion": "1.0.0",
   "modules": [
+    "nexpaq.module.speaker",
     "moduware.module.speaker"
   ],
   

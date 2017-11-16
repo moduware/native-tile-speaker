@@ -13,7 +13,7 @@ using System.Collections.Generic;
 
 namespace Moduware.Tile.Speaker.Droid
 {
-    [Activity(Label = "Speaker", MainLauncher = true, Theme = "@style/speakerTheme", LaunchMode = Android.Content.PM.LaunchMode.SingleInstance)]
+    [Activity(Label = "Speaker", Theme = "@style/speakerTheme", LaunchMode = Android.Content.PM.LaunchMode.SingleInstance)]
     [IntentFilter(new [] { "android.intent.action.VIEW" }, DataScheme = "moduware.tile.speaker", Categories = new [] { "android.intent.category.DEFAULT", "android.intent.category.BROWSABLE" })]
     public class MainActivity : TileActivity
     {
@@ -23,14 +23,14 @@ namespace Moduware.Tile.Speaker.Droid
 
         private List<string> targetModuleTypes = new List<string>
         {
-            "moduware.module.speaker"
+            "nexpaq.module.speaker", // old classic USB speaker
+            "moduware.module.speaker" // modern bluetooth speaker
         };
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            //ActionBar.SetDisplayHomeAsUpEnabled(true);
             // We need assign Id of our tile here, it is required for proper Dashboard - Tile communication
             TileId = "moduware.tile.speaker";
 
@@ -43,7 +43,16 @@ namespace Moduware.Tile.Speaker.Droid
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
             Window.SetFeatureInt(Android.Views.WindowFeatures.CustomTitle, Resource.Layout.Header);
+            //Window.SetStatusBarColor(new Android.Graphics.Color(180, 64, 60));
 
+            SetupUiListeners();
+
+            // We need to know when core is ready so we can start listening for data from gateways
+            CoreReady += CoreReadyHandler;
+        }
+
+        private void SetupUiListeners()
+        {
             var backButton = FindViewById<ImageButton>(Resource.Id.back_button);
             backButton.Click += (o, e) => Utilities.OpenDashboard();
 
@@ -52,9 +61,6 @@ namespace Moduware.Tile.Speaker.Droid
 
             _defaultSwitch = FindViewById<Switch>(Resource.Id.defaultSwitch);
             _defaultSwitch.CheckedChange += DefaultSwitchStateCheckedChange;
-
-            // We need to know when core is ready so we can start listening for data from gateways
-            CoreReady += CoreReadyHandler;
         }
 
         private void DefaultSwitchStateCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
