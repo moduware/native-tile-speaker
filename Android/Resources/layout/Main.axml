@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@color/backgroundcolor"
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/instructionText"
@@ -17,4 +18,28 @@
         android:src="@drawable/speaker_button_off"
         android:background="@null"
         android:id="@+id/speaker_button" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:paddingLeft="28dip"
+        android:paddingRight="20dip"
+        android:background="@color/bottombarcolor"
+        android:layout_height="72dip">
+        <TextView
+            android:id="@+id/defaultStateText"
+            android:text="Turn on when plugged in"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentLeft="true"
+            android:textSize="16dip"
+            android:gravity="start|center_vertical"
+            android:textColor="#fff" />
+        <Switch
+            android:id="@+id/defaultSwitch"
+            android:layout_alignParentRight="true"
+            android:showText="false"
+            android:track="@mipmap/track"
+            android:thumb="@mipmap/knob"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent" />
+    </RelativeLayout>
 </LinearLayout>

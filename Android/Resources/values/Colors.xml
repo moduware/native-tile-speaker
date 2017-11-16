@@ -2,5 +2,7 @@
 <resources>
   <color name="titlebackgroundcolor">#E1514C</color>
   <color name="titletextcolor">#FFF</color>
+  <color name="backgroundcolor">#2E334B</color>
   <color name="instructiontextcolor">#6D7081</color>
+  <color name="bottombarcolor">#212436</color>
 </resources>

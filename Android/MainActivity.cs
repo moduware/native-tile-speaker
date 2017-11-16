@@ -40,6 +40,21 @@ namespace Moduware.Tile.Speaker.Droid
             SetContentView(Resource.Layout.Main);
             Window.SetFeatureInt(Android.Views.WindowFeatures.CustomTitle, Resource.Layout.Header);
 
+            var switchOne = FindViewById<Switch>(Resource.Id.defaultSwitch);
+            switchOne.CheckedChange += (o, e) =>
+            {
+                if (e.IsChecked)
+                {
+                    switchOne.TrackDrawable = GetDrawable(Resource.Mipmap.track_active);
+                    switchOne.ThumbDrawable = GetDrawable(Resource.Mipmap.thumb_active);
+                }
+                else
+                {
+                    switchOne.TrackDrawable = GetDrawable(Resource.Mipmap.track);
+                    switchOne.ThumbDrawable = GetDrawable(Resource.Mipmap.knob);
+                }
+            };
+
             // Binding handlers to UI elements
             //var ConfigButton = FindViewById<Button>(Resource.Id.button1);
             //ConfigButton.Click += ConfigButtonClickHandler;
