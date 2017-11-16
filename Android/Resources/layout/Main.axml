@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="@color/backgroundcolor"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/instructionText"
-        android:text="Tap to turn on or off the speaker."
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14dip"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:textColor="@color/instructiontextcolor" />
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/speaker_button_off"
-        android:background="@null"
-        android:id="@+id/speaker_button" />
+        android:paddingBottom="72dip"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/instructionText"
+            android:text="Tap to turn on or off the speaker."
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14dip"
+            android:gravity="center"
+            android:paddingBottom="50dip"
+            android:textColor="@color/instructiontextcolor" />
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/speaker_button_off"
+            android:background="@null"
+            android:id="@+id/speaker_button" />
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:paddingLeft="28dip"
         android:paddingRight="20dip"
         android:background="@color/bottombarcolor"
-        android:layout_height="72dip">
+        android:layout_height="72dip"
+        android:layout_alignParentBottom="true">
         <TextView
             android:id="@+id/defaultStateText"
             android:text="Turn on when plugged in"
@@ -42,4 +50,4 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent" />
     </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>
