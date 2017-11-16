@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Moduware.Tile.Speaker.Droid
 {
-    [Activity(Label = "SplashActivity", Theme = "SplashActivity", MainLauncher = true)]
+    [Activity(Label = "Speaker", Theme = "@style/SplashTheme", MainLauncher = true)]
     //[IntentFilter(new { "android.intent.action.MAIN" })]
     ///[IntentFilter(new { "android.intent.category.LAUNCHER" })]
     public class SplashActivity : Activity
@@ -24,7 +24,8 @@ namespace Moduware.Tile.Speaker.Droid
             // Create your application here
             var intent = new Intent(this, typeof(MainActivity));
             StartActivity(intent);
-            finish();
+            OverridePendingTransition(0, 0);
+            Finish();
         }
     }
 }
