@@ -41,11 +41,11 @@ namespace Moduware.Tile.Speaker.Droid
             Window.SetFeatureInt(Android.Views.WindowFeatures.CustomTitle, Resource.Layout.Header);
 
             // Binding handlers to UI elements
-            var ConfigButton = FindViewById<Button>(Resource.Id.button1);
-            ConfigButton.Click += ConfigButtonClickHandler;
+            //var ConfigButton = FindViewById<Button>(Resource.Id.button1);
+            //ConfigButton.Click += ConfigButtonClickHandler;
 
-            var DashboardButton = FindViewById<Button>(Resource.Id.button2);
-            DashboardButton.Click += (s, e) => Utilities.OpenDashboard();
+            //var DashboardButton = FindViewById<Button>(Resource.Id.button2);
+            //DashboardButton.Click += (s, e) => Utilities.OpenDashboard();
 
             // We need to know when core is ready so we can start listening for data from gateways
             CoreReady += CoreReadyHandler;
@@ -92,23 +92,23 @@ namespace Moduware.Tile.Speaker.Droid
         private void ConfigButtonClickHandler(Object source, EventArgs e)
         {
             
-            var RedEditbox = FindViewById<EditText>(Resource.Id.editText1);
-            var GreenEditbox = FindViewById<EditText>(Resource.Id.editText2);
-            var BlueEditbox = FindViewById<EditText>(Resource.Id.editText3);
+            //var RedEditbox = FindViewById<EditText>(Resource.Id.editText1);
+            //var GreenEditbox = FindViewById<EditText>(Resource.Id.editText2);
+            //var BlueEditbox = FindViewById<EditText>(Resource.Id.editText3);
 
-            // getting color
-            var RedNumber = int.Parse(RedEditbox.Text);
-            var GreenNumber = int.Parse(GreenEditbox.Text);
-            var BlueNumber = int.Parse(BlueEditbox.Text);
+            //// getting color
+            //var RedNumber = int.Parse(RedEditbox.Text);
+            //var GreenNumber = int.Parse(GreenEditbox.Text);
+            //var BlueNumber = int.Parse(BlueEditbox.Text);
 
-            // We are working with target module or first of type, what is fine for single module use
-            var targetModuleUuid = GetUuidOfTargetModuleOrFirstOfType(targetModuleTypes);
+            //// We are working with target module or first of type, what is fine for single module use
+            //var targetModuleUuid = GetUuidOfTargetModuleOrFirstOfType(targetModuleTypes);
 
-            // Running command on found module
-            if (targetModuleUuid != Uuid.Empty)
-            {
-                Core.API.Module.SendCommand(targetModuleUuid, "SetRGB", new[] { RedNumber, GreenNumber, BlueNumber });
-            }
+            //// Running command on found module
+            //if (targetModuleUuid != Uuid.Empty)
+            //{
+            //    Core.API.Module.SendCommand(targetModuleUuid, "SetRGB", new[] { RedNumber, GreenNumber, BlueNumber });
+            //}
         }
     }
 }
