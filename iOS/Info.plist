@@ -47,5 +47,9 @@
 			<string>Viewer</string>
 		</dict>
 	</array>
+	<key>XSLaunchImageAssets</key>
+	<string>Resources/Media.xcassets/LaunchImages.launchimage</string>
+	<key>XSAppIconAssets</key>
+	<string>Resources/Media.xcassets/AppIcons.appiconset</string>
 </dict>
 </plist>
