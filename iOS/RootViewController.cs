@@ -16,8 +16,8 @@ namespace Moduware.Tile.Speaker.iOS
     {
         private List<string> targetModuleTypes = new List<string>
         {
-            "nexpaq.module.led",
-            "moduware.module.led" // new module type using other kind of LEDs
+            "nexpaq.module.speaker", // old usb speaker
+            "moduware.module.speaker" // new bluetooth
         };
 
         public RootViewController() : base("RootViewController", null) { }
@@ -32,7 +32,7 @@ namespace Moduware.Tile.Speaker.iOS
         public override void ViewDidLoad()
         {
             // We need assign Id of our tile here, it is required for proper Dashboard - Tile communication
-            TileId = "moduware.tile.template";
+            TileId = "moduware.tile.speaker";
 
             // Logger to output messages from PlatformCore to console
             Log.Logger = new LoggerConfiguration()

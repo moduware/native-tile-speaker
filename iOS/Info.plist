@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Moduware.Tile.Speaker.iOS</string>
+	<string>Speaker</string>
 	<key>CFBundleIdentifier</key>
-	<string>moduware.xamarin.tile-template</string>
+	<string>moduware.tile.speaker</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -30,22 +30,22 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>moduware.application.dashboard</string>
-  </array>
-  <key>CFBundleURLTypes</key>
-  <array>
-    <dict>
-      <key>CFBundleURLName</key>
-      <string>moduware.xamarin.tile-template.urlscheme</string>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>moduware.tile.template</string>
-      </array>
-      <key>CFBundleURLTypes</key>
-      <string>Viewer</string>
-    </dict>
-  </array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>moduware.application.dashboard</string>
+	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>moduware.xamarin.tile-template.urlscheme</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>moduware.tile.template</string>
+			</array>
+			<key>CFBundleURLTypes</key>
+			<string>Viewer</string>
+		</dict>
+	</array>
 </dict>
 </plist>
