@@ -14,6 +14,11 @@ namespace Moduware.Tile.Speaker.iOS
 {
     public partial class RootViewController : TileViewController
     {
+        private bool _active = false;
+
+        private UIImageView speakerButtonOffImage;
+        private UIImageView speakerButtonOnImage;
+
         private List<string> targetModuleTypes = new List<string>
         {
             "nexpaq.module.speaker", // old usb speaker
@@ -41,6 +46,13 @@ namespace Moduware.Tile.Speaker.iOS
 
             // We need to know when core is ready so we can start listening for data from gateways
             CoreReady += CoreReadyHandler;
+
+            speakerButtonOffImage = new UIImageView(View.Frame);
+            speakerButtonOffImage.Image = UIImage.FromBundle("SpeakerButtonOff");
+
+            speakerButtonOnImage = new UIImageView(View.Frame);
+            speakerButtonOnImage.Image = UIImage.FromBundle("SpeakerButtonOn");
+
 
             base.ViewDidLoad();
         }
@@ -83,20 +95,32 @@ namespace Moduware.Tile.Speaker.iOS
             }
         }
 
-        partial void SetColorButton_TouchUpInside(UIButton sender)
+        partial void SpeakerButtonDown(UIKit.UIButton sender)
         {
-            var RedNumber = int.Parse(RedColor.Text);
-            var GreenNumber = int.Parse(GreenColor.Text);
-            var BlueNumber = int.Parse(BlueColor.Text);
-
-            // We are working with target module or first of type, what is fine for single module use
-            var targetModuleUuid = GetUuidOfTargetModuleOrFirstOfType(targetModuleTypes);
-
-            // Running command on found module
-            if (targetModuleUuid != Uuid.Empty)
+            _active = !_active;
+            if(_active)
             {
-                Core.API.Module.SendCommand(targetModuleUuid, "SetRGB", new[] { RedNumber, GreenNumber, BlueNumber });
+                SpeakerButton.SetBackgroundImage(speakerButtonOnImage.Image, UIControlState.Normal);
+            } else
+            {
+                SpeakerButton.SetBackgroundImage(speakerButtonOffImage.Image, UIControlState.Normal);
             }
         }
+
+        //partial void SetColorButton_TouchUpInside(UIButton sender)
+        //{
+        //    var RedNumber = int.Parse(RedColor.Text);
+        //    var GreenNumber = int.Parse(GreenColor.Text);
+        //    var BlueNumber = int.Parse(BlueColor.Text);
+
+        //    // We are working with target module or first of type, what is fine for single module use
+        //    var targetModuleUuid = GetUuidOfTargetModuleOrFirstOfType(targetModuleTypes);
+
+        //    // Running command on found module
+        //    if (targetModuleUuid != Uuid.Empty)
+        //    {
+        //        Core.API.Module.SendCommand(targetModuleUuid, "SetRGB", new[] { RedNumber, GreenNumber, BlueNumber });
+        //    }
+        //}
     }
 }

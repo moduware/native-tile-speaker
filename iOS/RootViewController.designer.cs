@@ -15,44 +15,35 @@ namespace Moduware.Tile.Speaker.iOS
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField BlueColor { get; set; }
+        UIKit.UIButton BackButton { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField GreenColor { get; set; }
+        UIKit.UISwitch DefaultSwitch { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UITextField RedColor { get; set; }
+        UIKit.UIButton SpeakerButton { get; set; }
 
-        [Outlet]
+        [Action ("SpeakerButtonDown:")]
         [GeneratedCode ("iOS Designer", "1.0")]
-        UIKit.UIButton SetColorButton { get; set; }
-
-        [Action ("SetColorButton_TouchUpInside:")]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        partial void SetColorButton_TouchUpInside (UIKit.UIButton sender);
+        partial void SpeakerButtonDown (UIKit.UIButton sender);
 
         void ReleaseDesignerOutlets ()
         {
-            if (BlueColor != null) {
-                BlueColor.Dispose ();
-                BlueColor = null;
+            if (BackButton != null) {
+                BackButton.Dispose ();
+                BackButton = null;
             }
 
-            if (GreenColor != null) {
-                GreenColor.Dispose ();
-                GreenColor = null;
+            if (DefaultSwitch != null) {
+                DefaultSwitch.Dispose ();
+                DefaultSwitch = null;
             }
 
-            if (RedColor != null) {
-                RedColor.Dispose ();
-                RedColor = null;
-            }
-
-            if (SetColorButton != null) {
-                SetColorButton.Dispose ();
-                SetColorButton = null;
+            if (SpeakerButton != null) {
+                SpeakerButton.Dispose ();
+                SpeakerButton = null;
             }
         }
     }
