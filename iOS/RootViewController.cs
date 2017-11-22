@@ -55,6 +55,7 @@ namespace Moduware.Tile.Speaker.iOS
 
 
             base.ViewDidLoad();
+            
         }
 
         private void CoreReadyHandler(Object source, EventArgs e)

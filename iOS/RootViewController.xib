@@ -68,6 +68,16 @@
                         <action selector="SpeakerButtonDown:" destination="-1" id="773" eventType="touchDown"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="958" translatesAutoresizingMaskIntoConstraints="NO">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                    <color key="backgroundColor" colorSpace="calibratedRGB" red="0.70588235294117652" green="0.25098039215686274" blue="0.23529411764705882" alpha="1"/>
+                    <constraints>
+                        <constraint id="961" firstItem="958" firstAttribute="height" constant="20"/>
+                    </constraints>
+                </label>
             </subviews>
             <constraints>
                 <constraint id="181" firstItem="148" firstAttribute="width" secondItem="2" secondAttribute="width"/>
@@ -88,6 +98,9 @@
                 <constraint id="745" firstItem="700" firstAttribute="top" secondItem="177" secondAttribute="bottom" constant="45"/>
                 <constraint id="746" firstItem="177" firstAttribute="trailing" secondItem="2" secondAttribute="trailing"/>
                 <constraint id="747" firstItem="177" firstAttribute="leading" secondItem="2" secondAttribute="leading"/>
+                <constraint id="962" firstItem="958" firstAttribute="top" secondItem="2" secondAttribute="top"/>
+                <constraint id="963" firstItem="958" firstAttribute="leading" secondItem="2" secondAttribute="leading"/>
+                <constraint id="964" firstItem="958" firstAttribute="trailing" secondItem="2" secondAttribute="trailing"/>
             </constraints>
         </view>
     </objects>
@@ -95,5 +108,6 @@
         <image name="BackButton" width="13" height="22"/>
         <image name="SpeakerButtonOff" width="128" height="128"/>
         <image name="SpeakerButtonOn" width="128" height="128"/>
+        <image name="TileIcon" width="60" height="60"/>
     </resources>
 </document>

@@ -77,10 +77,9 @@ namespace Moduware.Tile.Speaker.Droid
             }
         }
 
-        private void SpeakerButtonClickHandler(object sender, EventArgs e)
+        private void SetSpeakerButtonState(bool state)
         {
-            _active = !_active;
-            if(_active)
+            if(state)
             {
                 _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_on));
             } else
@@ -89,19 +88,35 @@ namespace Moduware.Tile.Speaker.Droid
             }
         }
 
-        private void CoreReadyHandler(Object source, EventArgs e)
+        private void SpeakerButtonClickHandler(object sender, EventArgs e)
         {
-            /**
-            * We can setup lister for received data here
-            * you can remove it if your tile not receiving any data from module
-            */
-            Core.API.Module.DataReceived += ModuleDataReceivedHandler;
+            _active = !_active;
 
-            /**
-             * You can use raw data event to process raw data from module in byte format without 
-             * processing it through module driver
-             */
-            // Core.API.Module.RawDataReceived += ...;
+            var targetModuleUuid = GetUuidOfTargetModuleOrFirstOfType(targetModuleTypes);
+            if (targetModuleUuid == Uuid.Empty) return;
+            if (_active)
+            {
+                SetSpeakerButtonState(true);
+
+                Core.API.Module.SendCommand(targetModuleUuid, "Connect", new int[] { });
+            } else
+            {
+                SetSpeakerButtonState(false);
+
+                Core.API.Module.SendCommand(targetModuleUuid, "Disconnect", new int[] { });
+            }
+        }
+
+        private void RequestStatus()
+        {
+            var targetModuleUuid = GetUuidOfTargetModuleOrFirstOfType(targetModuleTypes);
+            if (targetModuleUuid == Uuid.Empty) return;
+            Core.API.Module.SendCommand(targetModuleUuid, "StatusCheck", new int[] { });
+        }
+
+        private void CoreReadyHandler(Object source, EventArgs _e)
+        {
+            Core.API.Module.DataReceived += ModuleDataReceivedHandler;
         }
 
         private void ModuleDataReceivedHandler(object sender, DriverParseResultEventArgs e)
@@ -110,43 +125,17 @@ namespace Moduware.Tile.Speaker.Droid
             // If there are no supported modules plugged in
             if (targetModuleUuid == Uuid.Empty) return;
             // Ignoring data coming from non-target modules
-            if (e.ModuleUUID != targetModuleUuid) return;
+            if (e.ModuleUUID.ToString() == targetModuleUuid.ToString()) return;
 
-            // TODO: here we need to work with parsed data from module somehow 
-            
-            /**
-             * It is a good practice to scope your data to some contexts
-             * and first check context before processing data from module
-             */
-            // if(e.DataSource == "SensorValue") { ... }
-           
-            // outputing data variables to log
-            foreach(var variable in e.Variables)
+            if(e.DataSource == "StateChangeResponse" && e.Variables["result"] == "success")
             {
-                Log.Information(variable.Key + "= " + variable.Value);
+                RequestStatus();
             }
-        }
-
-        private void ConfigButtonClickHandler(Object source, EventArgs e)
-        {
-            
-            //var RedEditbox = FindViewById<EditText>(Resource.Id.editText1);
-            //var GreenEditbox = FindViewById<EditText>(Resource.Id.editText2);
-            //var BlueEditbox = FindViewById<EditText>(Resource.Id.editText3);
-
-            //// getting color
-            //var RedNumber = int.Parse(RedEditbox.Text);
-            //var GreenNumber = int.Parse(GreenEditbox.Text);
-            //var BlueNumber = int.Parse(BlueEditbox.Text);
-
-            //// We are working with target module or first of type, what is fine for single module use
-            //var targetModuleUuid = GetUuidOfTargetModuleOrFirstOfType(targetModuleTypes);
-
-            //// Running command on found module
-            //if (targetModuleUuid != Uuid.Empty)
-            //{
-            //    Core.API.Module.SendCommand(targetModuleUuid, "SetRGB", new[] { RedNumber, GreenNumber, BlueNumber });
-            //}
+            else if(e.DataSource == "StatusRequestResponse" && e.Variables["status"] == "connected")
+            {
+                _active = true;
+                SetSpeakerButtonState(true);
+            }
         }
     }
 }
