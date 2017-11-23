@@ -10,6 +10,7 @@ using Moduware.Platform.Tile.Droid;
 using Moduware.Platform.Core.CommonTypes;
 using Moduware.Platform.Core.EventArguments;
 using System.Collections.Generic;
+using Moduware.Tile.Speaker.Shared;
 
 namespace Moduware.Tile.Speaker.Droid
 {
@@ -20,19 +21,13 @@ namespace Moduware.Tile.Speaker.Droid
         private ImageButton _speakerButton;
         private Switch _defaultSwitch;
         private bool _active = false;
-        
-
-        private List<string> targetModuleTypes = new List<string>
-        {
-            "nexpaq.module.speaker", // old classic USB speaker
-            "moduware.module.speaker" // modern bluetooth speaker
-        };
+        private SpeakerTile _speaker;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             // We need assign Id of our tile here, it is required for proper Dashboard - Tile communication
-            TileId = "moduware.tile.speaker";
+            TileId = SpeakerTile.Id;
 
             // Logger to output messages from PlatformCore to console
             Log.Logger = new LoggerConfiguration()
@@ -98,56 +93,32 @@ namespace Moduware.Tile.Speaker.Droid
         {
             _active = !_active;
 
-            var targetModuleUuid = GetUuidOfTargetModuleOrFirstOfType(targetModuleTypes);
-            if (targetModuleUuid == Uuid.Empty) return;
             if (_active)
             {
                 SetSpeakerButtonState(true);
-
-                Core.API.Module.SendCommand(targetModuleUuid, "Connect", new int[] { });
+                _speaker.TurnOn();
             } else
             {
                 SetSpeakerButtonState(false);
-
-                Core.API.Module.SendCommand(targetModuleUuid, "Disconnect", new int[] { });
+                _speaker.TurnOff();
             }
-        }
-
-        private void RequestStatus()
-        {
-            var targetModuleUuid = GetUuidOfTargetModuleOrFirstOfType(targetModuleTypes);
-            if (targetModuleUuid == Uuid.Empty) return;
-            Core.API.Module.SendCommand(targetModuleUuid, "StatusCheck", new int[] { });
         }
 
         private void CoreReadyHandler(Object source, EventArgs _e)
         {
-            Core.API.Module.DataReceived += ModuleDataReceivedHandler;
-            Core.API.Module.TypeRecognised += (o, e) => RequestStatus();
+            _speaker = new SpeakerTile(Core, GetUuidOfTargetModuleOrFirstOfType, new SpeakerNativeTileMethods
+            {
+                SetSpeakerButtonStateMethod = (active) =>
+                {
+                    _active = true;
+                    SetSpeakerButtonState(true);
+                }
+            });
         }
 
         private void CoreConfigurationApplied(object sender, EventArgs e)
         {
-            RequestStatus();
-        }
-
-        private void ModuleDataReceivedHandler(object sender, DriverParseResultEventArgs e)
-        {
-            var targetModuleUuid = GetUuidOfTargetModuleOrFirstOfType(targetModuleTypes);
-            // If there are no supported modules plugged in
-            if (targetModuleUuid == Uuid.Empty) return;
-            // Ignoring data coming from non-target modules
-            if (!e.ModuleUUID.Equals(targetModuleUuid)) return;
-
-            if(e.DataSource == "StateChangeResponse" && e.Variables["result"] == "success")
-            {
-                RequestStatus();
-            }
-            else if(e.DataSource == "StatusRequestResponse" && e.Variables["status"] == "connected")
-            {
-                _active = true;
-                SetSpeakerButtonState(true);
-            }
+            _speaker.RequestStatus();
         }
     }
 }

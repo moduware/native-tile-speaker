@@ -177,6 +177,7 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpeakerNativeTileMethods.cs" />
     <Compile Include="SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +199,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\Moduware.Tile.Speaker.Shared\Moduware.Tile.Speaker.Shared.csproj">
+      <Project>{03cbd247-a243-456c-8df6-7c03d70edcc9}</Project>
+      <Name>Moduware.Tile.Speaker.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PlatformTile\Platform.Tile.Droid\Moduware.Platform.Tile.Droid.csproj">
       <Project>{55ae2db5-8f3c-4af2-819c-396850a05222}</Project>
       <Name>Moduware.Platform.Tile.Droid</Name>
