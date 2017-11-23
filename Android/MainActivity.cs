@@ -79,13 +79,17 @@ namespace Moduware.Tile.Speaker.Droid
 
         private void SetSpeakerButtonState(bool state)
         {
-            if(state)
+            RunOnUiThread(() =>
             {
-                _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_on));
-            } else
-            {
-                _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_off));
-            }
+                if (state)
+                {
+                    _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_on));
+                }
+                else
+                {
+                    _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_off));
+                }
+            });
         }
 
         private void SpeakerButtonClickHandler(object sender, EventArgs e)
@@ -125,7 +129,7 @@ namespace Moduware.Tile.Speaker.Droid
             // If there are no supported modules plugged in
             if (targetModuleUuid == Uuid.Empty) return;
             // Ignoring data coming from non-target modules
-            if (e.ModuleUUID.ToString() == targetModuleUuid.ToString()) return;
+            if (!e.ModuleUUID.Equals(targetModuleUuid)) return;
 
             if(e.DataSource == "StateChangeResponse" && e.Variables["result"] == "success")
             {
