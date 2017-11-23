@@ -58,25 +58,20 @@
       <HintPath>..\..\..\platform-core\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net45+win8+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Moduware.Platform.Core">
-      <HintPath>..\..\..\platform-core\packages\Moduware.Platform.Core.0.5.6521.20151\lib\portable45-net45+win8+wpa81\Moduware.Platform.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Moduware.Platform.Core, Version=0.5.6536.20697, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Moduware.Platform.Core.0.5.6536.20697\lib\portable45-net45+win8+wpa81\Moduware.Platform.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Moduware.Platform.Core.CommonTypes">
-      <HintPath>..\..\..\platform-core\packages\Moduware.Platform.Core.0.5.6521.20151\lib\portable45-net45+win8+wpa81\Moduware.Platform.Core.CommonTypes.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Moduware.Platform.Core.CommonTypes, Version=1.0.6536.20694, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Moduware.Platform.Core.0.5.6536.20697\lib\portable45-net45+win8+wpa81\Moduware.Platform.Core.CommonTypes.dll</HintPath>
     </Reference>
-    <Reference Include="Moduware.Platform.Core.CommunicationProtocol">
-      <HintPath>..\..\..\platform-core\packages\Moduware.Platform.Core.0.5.6521.20151\lib\portable45-net45+win8+wpa81\Moduware.Platform.Core.CommunicationProtocol.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Moduware.Platform.Core.CommunicationProtocol, Version=1.0.6536.20695, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Moduware.Platform.Core.0.5.6536.20697\lib\portable45-net45+win8+wpa81\Moduware.Platform.Core.CommunicationProtocol.dll</HintPath>
     </Reference>
-    <Reference Include="Moduware.Platform.Core.ModuleDriverSystem">
-      <HintPath>..\..\..\platform-core\packages\Moduware.Platform.Core.0.5.6521.20151\lib\portable45-net45+win8+wpa81\Moduware.Platform.Core.ModuleDriverSystem.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Moduware.Platform.Core.ModuleDriverSystem, Version=1.0.6536.20696, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Moduware.Platform.Core.0.5.6536.20697\lib\portable45-net45+win8+wpa81\Moduware.Platform.Core.ModuleDriverSystem.dll</HintPath>
     </Reference>
-    <Reference Include="Moduware.Platform.Core.Utilities">
-      <HintPath>..\..\..\platform-core\packages\Moduware.Platform.Core.0.5.6521.20151\lib\portable45-net45+win8+wpa81\Moduware.Platform.Core.Utilities.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Moduware.Platform.Core.Utilities, Version=1.0.6536.20694, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Moduware.Platform.Core.0.5.6536.20697\lib\portable45-net45+win8+wpa81\Moduware.Platform.Core.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="mscorlib" />
