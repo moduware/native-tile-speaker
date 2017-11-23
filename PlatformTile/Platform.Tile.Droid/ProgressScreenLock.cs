@@ -9,21 +9,26 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Moduware.Platform.Tile.Shared;
 
-namespace Moduware.Tile.Speaker.Droid
+namespace Moduware.Platform.Tile.Droid
 {
-    class ProgressScreenLock
+    class ProgressScreenLock : IProgressScreenLock
     {
         private Activity _context;
         private int _dialogsTheme = 5;
         private AlertDialog _dialog;
 
-        public ProgressScreenLock(Activity context, string title, string message)
+        public ProgressScreenLock(Activity context)
         {
             _context = context;
-            context.RunOnUiThread(() =>
+        }
+
+        public void Setup(string title, string message)
+        {
+            _context.RunOnUiThread(() =>
             {
-                var DialogBuilder = new AlertDialog.Builder(context, _dialogsTheme);
+                var DialogBuilder = new AlertDialog.Builder(_context, _dialogsTheme);
                 DialogBuilder.SetTitle(title);
                 DialogBuilder.SetMessage(message);
                 DialogBuilder.SetCancelable(false);
@@ -34,11 +39,13 @@ namespace Moduware.Tile.Speaker.Droid
 
         public void Show()
         {
+            if (_dialog == null) throw new MissingMemberException("You need call Setup before showing screen lock");
             _context.RunOnUiThread(() => _dialog.Show());
         }
 
         public void Hide()
         {
+            if (_dialog == null) throw new MissingMemberException("You need call Setup before hiding screen lock");
             _context.RunOnUiThread(() => _dialog.Hide());
         }
     }

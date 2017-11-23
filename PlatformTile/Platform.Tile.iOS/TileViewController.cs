@@ -19,6 +19,7 @@ namespace Moduware.Platform.Tile.iOS
             base.ViewDidLoad();
 
             Utilities = new Utilities(RunOnUiThread);
+            LockDialog = new ProgressScreenLock(RunOnUiThread);
         }
 
         public override void ViewDidAppear(bool animated)

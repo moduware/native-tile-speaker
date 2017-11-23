@@ -108,6 +108,7 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProgressScreenLock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TileViewController.cs" />
     <Compile Include="Utilities.cs" />

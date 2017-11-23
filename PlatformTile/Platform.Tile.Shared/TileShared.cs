@@ -26,11 +26,19 @@ namespace Moduware.Platform.Tile.Droid
         protected TileArguments Arguments = new TileArguments();
         protected Core.Core _core;
         protected IUtilities Utilities;
+        protected IProgressScreenLock LockDialog;
 
         private string CurrentConfiguration = String.Empty;
 
         public void OnCreateActions()
         {
+            LockDialog.Setup("Loading", "Connecting to device");
+            LockDialog.Show();
+            ConfigurationApplied += (o, e) =>
+            {
+                LockDialog.Hide();
+            };
+
             RunCore();
         }
 

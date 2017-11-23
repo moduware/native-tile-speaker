@@ -19,6 +19,7 @@ namespace Moduware.Platform.Tile.Droid
             base.OnCreate(savedInstanceState);
 
             Utilities = new Utilities(this);
+            LockDialog = new ProgressScreenLock(this);
 
             OnCreateActions();
         }
