@@ -20,6 +20,7 @@ namespace Moduware.Tile.Speaker.Droid
         private ImageButton _speakerButton;
         private Switch _defaultSwitch;
         private bool _active = false;
+        private ProgressScreenLock _lockDialog;
 
         private List<string> targetModuleTypes = new List<string>
         {
@@ -30,7 +31,8 @@ namespace Moduware.Tile.Speaker.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
+            _lockDialog = new ProgressScreenLock(this, "Loading", "Connecting to device");
+            _lockDialog.Show();
             // We need assign Id of our tile here, it is required for proper Dashboard - Tile communication
             TileId = "moduware.tile.speaker";
 
@@ -49,7 +51,10 @@ namespace Moduware.Tile.Speaker.Droid
 
             // We need to know when core is ready so we can start listening for data from gateways
             CoreReady += CoreReadyHandler;
+            ConfigurationApplied += CoreConfigurationApplied;
         }
+
+
 
         private void SetupUiListeners()
         {
@@ -121,6 +126,13 @@ namespace Moduware.Tile.Speaker.Droid
         private void CoreReadyHandler(Object source, EventArgs _e)
         {
             Core.API.Module.DataReceived += ModuleDataReceivedHandler;
+            Core.API.Module.TypeRecognised += (o, e) => RequestStatus();
+        }
+
+        private void CoreConfigurationApplied(object sender, EventArgs e)
+        {
+            _lockDialog.Hide();
+            RequestStatus();
         }
 
         private void ModuleDataReceivedHandler(object sender, DriverParseResultEventArgs e)

@@ -69,6 +69,7 @@ namespace Moduware.Platform.Tile.Droid
                 // Loading configuration in core, merging known devices with information about them
                 var configuration = url.QueryParams["current-configuration"].ToString();
                 Core.API.MergeConfig(configuration);
+                ConfigurationApplied(this, EventArgs.Empty);
             }
         }
 
@@ -161,6 +162,7 @@ namespace Moduware.Platform.Tile.Droid
                 // Using configuration from arguments
                 Core.API.MergeConfig(CurrentConfiguration);
                 CurrentConfiguration = String.Empty;
+                ConfigurationApplied(this, EventArgs.Empty);
             }
         }
 
@@ -204,6 +206,15 @@ namespace Moduware.Platform.Tile.Droid
             return GetUuidOfTargetModuleOrFirstOfType(new List<string> { type });
         }
 
+        /// <summary>
+        /// Happens after core and all it's resources completely loaded
+        /// </summary>
         public event EventHandler CoreReady = delegate { };
+
+        /// <summary>
+        /// Happens after configuration received from main app applied and
+        /// we can start sending commands to modules
+        /// </summary>
+        public event EventHandler ConfigurationApplied = delegate { };
     }
 }
