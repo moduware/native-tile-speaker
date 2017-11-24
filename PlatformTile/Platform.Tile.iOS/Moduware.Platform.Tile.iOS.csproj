@@ -117,6 +117,12 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Moduware.Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
+      <Project>{9D5ABDF9-F254-43A0-9C23-299EDDC32AFE}</Project>
+      <Name>Moduware.Platform.Tile.Types</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Platform.Tile.Shared\Platform.Tile.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />

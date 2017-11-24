@@ -37,7 +37,6 @@
   <ItemGroup>
     <Compile Include="ISpeakerTileNativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpeakerNativeTileMethods.cs" />
     <Compile Include="SpeakerTile.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +103,12 @@
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\netstandard1.1\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Moduware.Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
+      <Project>{9d5abdf9-f254-43a0-9c23-299eddc32afe}</Project>
+      <Name>Moduware.Platform.Tile.Types</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.4.0.280\build\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.targets')" />

@@ -9,8 +9,6 @@
     <Import_RootNamespace>Moduware.Platform.Tile.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)IProgressScreenLock.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IUtilities.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Structs\TileArguments.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TileShared.cs" />
   </ItemGroup>

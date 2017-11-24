@@ -18,7 +18,7 @@ namespace Moduware.Platform.Tile.iOS
         {
             base.ViewDidLoad();
 
-            Utilities = new Utilities(RunOnUiThread);
+            _utilities = new Utilities(RunOnUiThread);
             LockDialog = new ProgressScreenLock(RunOnUiThread);
         }
 

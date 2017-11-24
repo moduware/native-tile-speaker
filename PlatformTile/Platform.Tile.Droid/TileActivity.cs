@@ -2,7 +2,6 @@
 using Android.Content;
 using Android.OS;
 using Moduware.Platform.Core.CommonTypes;
-using Moduware.Platform.Tile.Shared;
 using System;
 using System.Threading.Tasks;
 
@@ -18,7 +17,7 @@ namespace Moduware.Platform.Tile.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            Utilities = new Utilities(this);
+            _utilities = new Utilities(this);
             LockDialog = new ProgressScreenLock(this);
 
             OnCreateActions();

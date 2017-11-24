@@ -1,4 +1,4 @@
-﻿using Moduware.Platform.Tile.Shared;
+﻿using Moduware.Platform.Tile.Types;
 using System;
 using System.Collections.Generic;
 using System.Text;

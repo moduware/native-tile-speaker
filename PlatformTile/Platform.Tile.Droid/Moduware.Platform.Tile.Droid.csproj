@@ -122,6 +122,12 @@
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Moduware.Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
+      <Project>{9d5abdf9-f254-43a0-9c23-299eddc32afe}</Project>
+      <Name>Moduware.Platform.Tile.Types</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\Platform.Tile.Shared\Platform.Tile.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />

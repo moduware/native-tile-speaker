@@ -200,6 +200,10 @@
     <Content Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Moduware.Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
+      <Project>{9d5abdf9-f254-43a0-9c23-299eddc32afe}</Project>
+      <Name>Moduware.Platform.Tile.Types</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Moduware.Tile.Speaker.Shared\Moduware.Tile.Speaker.Shared.csproj">
       <Project>{03cbd247-a243-456c-8df6-7c03d70edcc9}</Project>
       <Name>Moduware.Tile.Speaker.Shared</Name>

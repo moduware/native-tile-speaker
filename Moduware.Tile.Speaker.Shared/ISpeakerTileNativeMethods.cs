@@ -1,4 +1,5 @@
 ﻿using Moduware.Platform.Core.CommonTypes;
+using Moduware.Platform.Tile.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace Moduware.Tile.Speaker.Shared
 {
     public interface ISpeakerTileNativeMethods
     {
+        IUtilities Utilities { get; }
         void SetSpeakerButtonState(bool active);
         Uuid GetUuidOfTargetModuleOrFirstOfType(List<string> list);
+        event EventHandler ConfigurationApplied;
     }
 }
