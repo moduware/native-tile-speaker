@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Speaker</string>
 	<key>CFBundleIdentifier</key>
-	<string>moduware.tile.speaker</string>
+	<string>moduware.tile.speaker.ios</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -38,10 +38,10 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>moduware.xamarin.tile-template.urlscheme</string>
+			<string>moduware.xamarin.speaker.urlscheme</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>moduware.tile.template</string>
+				<string>moduware.tile.speaker</string>
 			</array>
 			<key>CFBundleURLTypes</key>
 			<string>Viewer</string>

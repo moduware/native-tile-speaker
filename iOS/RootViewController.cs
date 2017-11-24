@@ -9,21 +9,17 @@ using Moduware.Platform.Tile.iOS;
 using Moduware.Platform.Core.CommonTypes;
 using System.Collections.Generic;
 using Moduware.Platform.Core.EventArguments;
+using Moduware.Tile.Speaker.Shared;
 
 namespace Moduware.Tile.Speaker.iOS
 {
     public partial class RootViewController : TileViewController
     {
         private bool _active = false;
+        private SpeakerTile _speaker;
 
         private UIImageView speakerButtonOffImage;
         private UIImageView speakerButtonOnImage;
-
-        private List<string> targetModuleTypes = new List<string>
-        {
-            "nexpaq.module.speaker", // old usb speaker
-            "moduware.module.speaker" // new bluetooth
-        };
 
         public RootViewController() : base("RootViewController", null) { }
 
@@ -37,7 +33,7 @@ namespace Moduware.Tile.Speaker.iOS
         public override void ViewDidLoad()
         {
             // We need assign Id of our tile here, it is required for proper Dashboard - Tile communication
-            TileId = "moduware.tile.speaker";
+            TileId = SpeakerTile.Id;
 
             // Logger to output messages from PlatformCore to console
             Log.Logger = new LoggerConfiguration()
@@ -46,6 +42,8 @@ namespace Moduware.Tile.Speaker.iOS
 
             // We need to know when core is ready so we can start listening for data from gateways
             CoreReady += CoreReadyHandler;
+            // And we need to know when we are ready to send commands
+            ConfigurationApplied += CoreConfigurationApplied;
 
             speakerButtonOffImage = new UIImageView(View.Frame);
             speakerButtonOffImage.Image = UIImage.FromBundle("SpeakerButtonOff");
@@ -54,74 +52,48 @@ namespace Moduware.Tile.Speaker.iOS
             speakerButtonOnImage.Image = UIImage.FromBundle("SpeakerButtonOn");
 
 
-            base.ViewDidLoad();
-            
+            base.ViewDidLoad(); 
         }
 
         private void CoreReadyHandler(Object source, EventArgs e)
         {
-            /**
-            * We can setup lister for received data here
-            * you can remove it if your tile not receiving any data from module
-            */
-            Core.API.Module.DataReceived += ModuleDataReceivedHandler;
-
-            /**
-             * You can use raw data event to process raw data from module in byte format without 
-             * processing it through module driver
-             */
-            // Core.API.Module.RawDataReceived += ...;
+            _speaker = new SpeakerTile(Core, GetUuidOfTargetModuleOrFirstOfType, new SpeakerNativeTileMethods
+            {
+                SetSpeakerButtonStateMethod = (active) =>
+                {
+                    _active = true;
+                    SetSpeakerButtonState(true);
+                }
+            });
         }
 
-        private void ModuleDataReceivedHandler(object sender, DriverParseResultEventArgs e)
+        private void SetSpeakerButtonState(bool active)
         {
-            var targetModuleUuid = GetUuidOfTargetModuleOrFirstOfType(targetModuleTypes);
-            // If there are no supported modules plugged in
-            if (targetModuleUuid == Uuid.Empty) return;
-            // Ignoring data coming from non-target modules
-            if (e.ModuleUUID != targetModuleUuid) return;
-
-            // TODO: here we need to work with parsed data from module somehow 
-
-            /**
-             * It is a good practice to scope your data to some contexts
-             * and first check context before processing data from module
-             */
-            // if(e.DataSource == "SensorValue") { ... }
-
-            // outputing data variables to log
-            foreach (var variable in e.Variables)
+            if(active)
             {
-                Log.Information(variable.Key + "= " + variable.Value);
+                RunOnUiThread(() => SpeakerButton.SetBackgroundImage(speakerButtonOnImage.Image, UIControlState.Normal));
+            } else
+            {
+                RunOnUiThread(() => SpeakerButton.SetBackgroundImage(speakerButtonOffImage.Image, UIControlState.Normal));
             }
         }
 
         partial void SpeakerButtonDown(UIKit.UIButton sender)
         {
             _active = !_active;
+            SetSpeakerButtonState(_active);
             if(_active)
             {
-                SpeakerButton.SetBackgroundImage(speakerButtonOnImage.Image, UIControlState.Normal);
+                _speaker.TurnOn();
             } else
             {
-                SpeakerButton.SetBackgroundImage(speakerButtonOffImage.Image, UIControlState.Normal);
+                _speaker.TurnOff();
             }
         }
 
-        //partial void SetColorButton_TouchUpInside(UIButton sender)
-        //{
-        //    var RedNumber = int.Parse(RedColor.Text);
-        //    var GreenNumber = int.Parse(GreenColor.Text);
-        //    var BlueNumber = int.Parse(BlueColor.Text);
-
-        //    // We are working with target module or first of type, what is fine for single module use
-        //    var targetModuleUuid = GetUuidOfTargetModuleOrFirstOfType(targetModuleTypes);
-
-        //    // Running command on found module
-        //    if (targetModuleUuid != Uuid.Empty)
-        //    {
-        //        Core.API.Module.SendCommand(targetModuleUuid, "SetRGB", new[] { RedNumber, GreenNumber, BlueNumber });
-        //    }
-        //}
+        private void CoreConfigurationApplied(object sender, EventArgs e)
+        {
+            _speaker.RequestStatus();
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace Moduware.Platform.Tile.iOS
             OnCreateActions();
         }
 
-        private void RunOnUiThread(Action action)
+        protected void RunOnUiThread(Action action)
         {
             InvokeOnMainThread(action);
         }

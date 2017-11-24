@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="ISpeakerTileNativeMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpeakerNativeTileMethods.cs" />
     <Compile Include="SpeakerTile.cs" />
   </ItemGroup>
   <ItemGroup>

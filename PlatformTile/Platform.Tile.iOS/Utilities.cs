@@ -40,7 +40,7 @@ namespace Moduware.Platform.Tile.iOS
         public Task ShowAlertAsync(string title, string message, string buttonText)
         {
             var t = new TaskCompletionSource<bool>();
-            _runOnUIThread(() =>
+            _runOnUIThread(async () =>
             {
                 var alert = UIAlertController.Create(title, message, UIAlertControllerStyle.Alert);
                 alert.AddAction(UIAlertAction.Create(buttonText, UIAlertActionStyle.Default, (action) => {
@@ -48,6 +48,7 @@ namespace Moduware.Platform.Tile.iOS
                 }));
 
                 //Let javascript handle the OK click by passing the completionHandler to the controller
+                await UIApplication.SharedApplication.KeyWindow.RootViewController.DismissViewControllerAsync(false);
                 UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
             });
             return t.Task;

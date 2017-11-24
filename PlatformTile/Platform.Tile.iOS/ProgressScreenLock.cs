@@ -34,7 +34,10 @@ namespace Moduware.Platform.Tile.iOS
 
         public void Hide()
         {
-            _runOnUiThread(() => _alert.Dispose());
+            _runOnUiThread(() =>
+            {
+                _alert.DismissViewController(true, null);
+            });
         }
     }
 }
