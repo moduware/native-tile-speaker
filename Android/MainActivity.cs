@@ -16,7 +16,7 @@ namespace Moduware.Tile.Speaker.Droid
 {
     [Activity(Label = "Speaker", Theme = "@style/speakerTheme", LaunchMode = Android.Content.PM.LaunchMode.SingleInstance)]
     [IntentFilter(new[] { "android.intent.action.VIEW" }, DataScheme = "moduware.tile.speaker", Categories = new[] { "android.intent.category.DEFAULT", "android.intent.category.BROWSABLE" })]
-    public class MainActivity : TileActivity
+    public class MainActivity : TileActivity, ISpeakerTileNativeMethods
     {
         private ImageButton _speakerButton;
         private Switch _defaultSwitch;
@@ -74,46 +74,35 @@ namespace Moduware.Tile.Speaker.Droid
             }
         }
 
-        private void SetSpeakerButtonState(bool state)
+        public void SetSpeakerButtonState(bool active)
         {
-            RunOnUiThread(() =>
+            _active = active;
+            if (active)
             {
-                if (state)
-                {
-                    _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_on));
-                }
-                else
-                {
-                    _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_off));
-                }
-            });
+                RunOnUiThread(() => _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_on)));
+            }
+            else
+            {
+                RunOnUiThread(() => _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_off)));
+            }
         }
 
         private void SpeakerButtonClickHandler(object sender, EventArgs e)
         {
-            _active = !_active;
+            SetSpeakerButtonState(!_active);
 
             if (_active)
             {
-                SetSpeakerButtonState(true);
                 _speaker.TurnOn();
             } else
             {
-                SetSpeakerButtonState(false);
                 _speaker.TurnOff();
             }
         }
 
         private void CoreReadyHandler(Object source, EventArgs _e)
         {
-            _speaker = new SpeakerTile(Core, GetUuidOfTargetModuleOrFirstOfType, new SpeakerNativeTileMethods
-            {
-                SetSpeakerButtonStateMethod = (active) =>
-                {
-                    _active = true;
-                    SetSpeakerButtonState(true);
-                }
-            });
+            _speaker = new SpeakerTile(Core, this);
         }
 
         private void CoreConfigurationApplied(object sender, EventArgs e)

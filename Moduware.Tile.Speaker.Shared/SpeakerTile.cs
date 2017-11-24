@@ -21,10 +21,10 @@ namespace Moduware.Tile.Speaker.Shared
         private Func<List<string>, Uuid> _moduleSearchFunc;
         private ISpeakerTileNativeMethods _nativeSpeakerTileMethods;
 
-        public SpeakerTile(Core core, Func<List<string>, Uuid> moduleSearchFunc, ISpeakerTileNativeMethods nativeSpeakerTileMethods)
+        public SpeakerTile(Core core, ISpeakerTileNativeMethods nativeSpeakerTileMethods)
         {
             _core = core;
-            _moduleSearchFunc = moduleSearchFunc;
+            _moduleSearchFunc = nativeSpeakerTileMethods.GetUuidOfTargetModuleOrFirstOfType;
             _nativeSpeakerTileMethods = nativeSpeakerTileMethods;
 
             _core.API.Module.DataReceived += ModuleDataReceivedHandler;

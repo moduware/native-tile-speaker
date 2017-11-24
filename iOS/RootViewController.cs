@@ -13,7 +13,7 @@ using Moduware.Tile.Speaker.Shared;
 
 namespace Moduware.Tile.Speaker.iOS
 {
-    public partial class RootViewController : TileViewController
+    public partial class RootViewController : TileViewController, ISpeakerTileNativeMethods
     {
         private bool _active = false;
         private SpeakerTile _speaker;
@@ -22,13 +22,6 @@ namespace Moduware.Tile.Speaker.iOS
         private UIImageView speakerButtonOnImage;
 
         public RootViewController() : base("RootViewController", null) { }
-
-        public override void DidReceiveMemoryWarning()
-        {
-            base.DidReceiveMemoryWarning();
-
-            // Release any cached data, images, etc that aren't in use.
-        }
 
         public override void ViewDidLoad()
         {
@@ -45,43 +38,40 @@ namespace Moduware.Tile.Speaker.iOS
             // And we need to know when we are ready to send commands
             ConfigurationApplied += CoreConfigurationApplied;
 
+            LoadButtonImages();
+            base.ViewDidLoad(); 
+        }
+
+        private void LoadButtonImages()
+        {
             speakerButtonOffImage = new UIImageView(View.Frame);
             speakerButtonOffImage.Image = UIImage.FromBundle("SpeakerButtonOff");
 
             speakerButtonOnImage = new UIImageView(View.Frame);
             speakerButtonOnImage.Image = UIImage.FromBundle("SpeakerButtonOn");
-
-
-            base.ViewDidLoad(); 
         }
 
-        private void CoreReadyHandler(Object source, EventArgs e)
+        public void SetSpeakerButtonState(bool active)
         {
-            _speaker = new SpeakerTile(Core, GetUuidOfTargetModuleOrFirstOfType, new SpeakerNativeTileMethods
-            {
-                SetSpeakerButtonStateMethod = (active) =>
-                {
-                    _active = true;
-                    SetSpeakerButtonState(true);
-                }
-            });
-        }
-
-        private void SetSpeakerButtonState(bool active)
-        {
-            if(active)
+            _active = active;
+            if (active)
             {
                 RunOnUiThread(() => SpeakerButton.SetBackgroundImage(speakerButtonOnImage.Image, UIControlState.Normal));
-            } else
+            }
+            else
             {
                 RunOnUiThread(() => SpeakerButton.SetBackgroundImage(speakerButtonOffImage.Image, UIControlState.Normal));
             }
         }
 
+        private void CoreReadyHandler(Object source, EventArgs e)
+        {
+            _speaker = new SpeakerTile(Core, this);
+        }
+
         partial void SpeakerButtonDown(UIKit.UIButton sender)
         {
-            _active = !_active;
-            SetSpeakerButtonState(_active);
+            SetSpeakerButtonState(!_active);
             if(_active)
             {
                 _speaker.TurnOn();
