@@ -91,6 +91,11 @@ namespace Moduware.Tile.Speaker.iOS
             }
         }
 
+        partial void BackButtonDown(UIKit.UIButton sender)
+        {
+            Utilities.OpenDashboard();
+        }
+
         private void CoreConfigurationApplied(object sender, EventArgs e)
         {
             _speaker.RequestStatus();

@@ -39,6 +39,9 @@
                     <constraints>
                         <constraint id="199" firstItem="150" firstAttribute="width" constant="87"/>
                     </constraints>
+                    <connections>
+                        <action selector="BackButtonDown:" destination="-1" id="1157" eventType="touchDown"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="153" translatesAutoresizingMaskIntoConstraints="NO" text="       Turn on when plugged in">
                     <rect key="frame" x="0.0" y="506" width="600" height="54"/>
