@@ -19,6 +19,7 @@ namespace Moduware.Tile.Speaker.Shared
         public static string Id = "moduware.tile.speaker";
         private Core _core;
         private Uuid _targetModuleUuid;
+        private string _targetModuleType;
 
         private Func<List<string>, Uuid> _moduleSearchFunc;
         private ISpeakerTileNativeMethods _nativeMethods;
@@ -47,7 +48,13 @@ namespace Moduware.Tile.Speaker.Shared
             if (_targetModuleUuid != Uuid.Empty)
             {
                 var module = _core.API.Module.GetByUUID(_targetModuleUuid);
-                if (module == null) noModule = true;
+                if (module == null)
+                {
+                    noModule = true;
+                } else
+                {
+                    _targetModuleType = module.TypeID;
+                }
 
             } else
             {
@@ -64,33 +71,24 @@ namespace Moduware.Tile.Speaker.Shared
 
         public void TurnOn()
         {
-            var targetModuleUuid = _moduleSearchFunc(_targetModuleTypes);
-            if (targetModuleUuid == Uuid.Empty) return;
-            _core.API.Module.SendCommand(targetModuleUuid, "Connect", new int[] { });
+            _core.API.Module.SendCommand(_targetModuleUuid, "Connect", new int[] { });
         }
 
         public void TurnOff()
         {
-            var targetModuleUuid = _moduleSearchFunc(_targetModuleTypes);
-            if (targetModuleUuid == Uuid.Empty) return;
-            _core.API.Module.SendCommand(targetModuleUuid, "Disconnect", new int[] { });
+            _core.API.Module.SendCommand(_targetModuleUuid, "Disconnect", new int[] { });
         }
 
         public void RequestStatus()
         {
-            var targetModuleUuid = _moduleSearchFunc(_targetModuleTypes);
-            if (targetModuleUuid == Uuid.Empty) return;
-            _core.API.Module.SendCommand(targetModuleUuid, "StatusCheck", new int[] { });
+            _core.API.Module.SendCommand(_targetModuleUuid, "StatusCheck", new int[] { });
         }
 
         // moduware.module.speaker only
         public void AskBluetoothName()
         {
-            var targetModuleUuid = _moduleSearchFunc(_targetModuleTypes);
-            if (targetModuleUuid == Uuid.Empty) return;
-            var module = _core.API.Module.GetByUUID(targetModuleUuid);
-            if (module.TypeID != "moduware.module.speaker") return;
-            _core.API.Module.SendCommand(targetModuleUuid, "AskBluetoothName", new int[] { });
+            if (_targetModuleType != "moduware.module.speaker") return;
+            _core.API.Module.SendCommand(_targetModuleUuid, "AskBluetoothName", new int[] { });
         }
 
         private void ModuleDataReceivedHandler(object sender, DriverParseResultEventArgs e)
