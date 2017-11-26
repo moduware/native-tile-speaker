@@ -34,7 +34,16 @@ namespace Moduware.Tile.Speaker.Shared
             // After configuration recieved we need find module we want work with
             _nativeMethods.ConfigurationApplied += (o, e) => SetupTargetModule();
             // If module was pulled, we need to check if there are still supported module 
-            _core.API.Module.Pulled += (o, e) => SetupTargetModule();
+            _core.API.Module.Pulled += (o, e) =>
+            {
+                SetupTargetModule();
+                _bluetoothName = String.Empty;
+            };
+            _core.API.Gateway.Disconnected += (o, e) =>
+            {
+                SetupTargetModule();
+                _bluetoothName = String.Empty;
+            };
 
             _core.API.Module.DataReceived += ModuleDataReceivedHandler;
             _core.API.Module.TypeRecognised += (o, e) => RequestStatus();
@@ -72,6 +81,10 @@ namespace Moduware.Tile.Speaker.Shared
         public void TurnOn()
         {
             _core.API.Module.SendCommand(_targetModuleUuid, "Connect", new int[] { });
+            if(_targetModuleType == "moduware.module.speaker" && _bluetoothName == String.Empty)
+            {
+                AskBluetoothName();
+            }
         }
 
         public void TurnOff()
@@ -87,7 +100,6 @@ namespace Moduware.Tile.Speaker.Shared
         // moduware.module.speaker only
         public void AskBluetoothName()
         {
-            if (_targetModuleType != "moduware.module.speaker") return;
             _core.API.Module.SendCommand(_targetModuleUuid, "AskBluetoothName", new int[] { });
         }
 
@@ -109,6 +121,8 @@ namespace Moduware.Tile.Speaker.Shared
             } else if(e.DataSource == "BluetoothNameRequestResponse")
             {
                 _bluetoothName = e.Variables["bluetoothName"];
+                // Pairing device
+                _nativeMethods.PairToBluetoothDevice(_bluetoothName);
             }
         }
     }

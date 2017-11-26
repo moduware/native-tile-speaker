@@ -11,8 +11,11 @@ namespace Moduware.Tile.Speaker.Shared
     public interface ISpeakerTileNativeMethods
     {
         IUtilities Utilities { get; }
+
         void SetSpeakerButtonState(bool active);
         Uuid GetUuidOfTargetModuleOrFirstOfType(List<string> list);
+        void PairToBluetoothDevice(string name);
+
         event EventHandler ConfigurationApplied;
     }
 }
