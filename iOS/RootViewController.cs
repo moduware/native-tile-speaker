@@ -10,6 +10,7 @@ using Moduware.Platform.Core.CommonTypes;
 using System.Collections.Generic;
 using Moduware.Platform.Core.EventArguments;
 using Moduware.Tile.Speaker.Shared;
+using CoreBluetooth;
 
 namespace Moduware.Tile.Speaker.iOS
 {
@@ -89,6 +90,28 @@ namespace Moduware.Tile.Speaker.iOS
         private void CoreConfigurationApplied(object sender, EventArgs e)
         {
             _speaker.RequestStatus();
+        }
+
+        public void SetSpeakerDefaultState(bool active)
+        {
+            DefaultSwitch.Enabled = active;
+        }
+
+        public void PairToBluetoothDevice(string name)
+        {
+            var adapter = CrossBluetoothLE.Current.Adapter;
+            adapter.StartScanningForDevicesAsync(deviceFilter: (device) =>
+            {
+                if (device.Name == name)
+                {
+                    adapter.StopScanningForDevicesAsync();
+                    // Pairing device
+                    adapter.ConnectToDeviceAsync(device);
+
+                    return true;
+                }
+                return false;
+            });
         }
     }
 }
