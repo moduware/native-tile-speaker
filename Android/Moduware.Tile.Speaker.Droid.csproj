@@ -198,17 +198,17 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Moduware.Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
+    <ProjectReference Include="..\PlatformTile\Moduware.Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
       <Project>{9D5ABDF9-F254-43A0-9C23-299EDDC32AFE}</Project>
       <Name>Moduware.Platform.Tile.Types</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Moduware.Tile.Speaker.Shared\Moduware.Tile.Speaker.Shared.csproj">
-      <Project>{03cbd247-a243-456c-8df6-7c03d70edcc9}</Project>
-      <Name>Moduware.Tile.Speaker.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\PlatformTile\Platform.Tile.Droid\Moduware.Platform.Tile.Droid.csproj">
       <Project>{55ae2db5-8f3c-4af2-819c-396850a05222}</Project>
       <Name>Moduware.Platform.Tile.Droid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Moduware.Tile.Speaker.Shared.csproj">
+      <Project>{03cbd247-a243-456c-8df6-7c03d70edcc9}</Project>
+      <Name>Moduware.Tile.Speaker.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
