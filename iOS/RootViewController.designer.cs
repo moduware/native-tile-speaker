@@ -29,6 +29,10 @@ namespace Moduware.Tile.Speaker.iOS
         [GeneratedCode ("iOS Designer", "1.0")]
         partial void BackButtonDown (UIKit.UIButton sender);
 
+        [Action ("DefaultStateButtonChange:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void DefaultStateButtonChange (UIKit.UISwitch sender);
+
         [Action ("SpeakerButtonDown:")]
         [GeneratedCode ("iOS Designer", "1.0")]
         partial void SpeakerButtonDown (UIKit.UIButton sender);

@@ -55,6 +55,9 @@
                 </label>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="161" translatesAutoresizingMaskIntoConstraints="NO">
                     <rect key="frame" x="522" y="517.5" width="51" height="31"/>
+                    <connections>
+                        <action selector="DefaultStateButtonChange:" destination="-1" id="1379" eventType="valueChanged"/>
+                    </connections>
                 </switch>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to turn on or off the speaker." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="177" translatesAutoresizingMaskIntoConstraints="NO">
                     <rect key="frame" x="0.0" y="170.5" width="600" height="20.5"/>

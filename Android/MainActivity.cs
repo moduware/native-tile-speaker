@@ -64,6 +64,7 @@ namespace Moduware.Tile.Speaker.Droid
 
         private void DefaultSwitchStateCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
+            _speaker.ChangeSpeakerDefaultState(e.IsChecked);
             if (e.IsChecked)
             {
                 _defaultSwitch.TrackDrawable = GetDrawable(Resource.Mipmap.track_active);

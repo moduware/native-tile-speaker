@@ -87,6 +87,11 @@ namespace Moduware.Tile.Speaker.iOS
             Utilities.OpenDashboard();
         }
 
+        partial void DefaultStateButtonChange(UISwitch sender)
+        {
+            _speaker.ChangeSpeakerDefaultState(sender.Enabled);
+        }
+
         private void CoreConfigurationApplied(object sender, EventArgs e)
         {
             _speaker.RequestStatus();
