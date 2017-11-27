@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlatformTile", "PlatformTil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moduware.Tile.Speaker.Shared", "Shared\Moduware.Tile.Speaker.Shared.csproj", "{03CBD247-A243-456C-8DF6-7C03D70EDCC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moduware.Platform.Tile.Types", "PlatformTile\Moduware.Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj", "{9D5ABDF9-F254-43A0-9C23-299EDDC32AFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moduware.Platform.Tile.Types", "PlatformTile\Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj", "{9D5ABDF9-F254-43A0-9C23-299EDDC32AFE}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

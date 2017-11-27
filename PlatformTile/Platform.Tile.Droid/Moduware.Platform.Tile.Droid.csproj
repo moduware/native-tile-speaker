@@ -123,7 +123,7 @@
     <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Moduware.Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
+    <ProjectReference Include="..\Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
       <Project>{9d5abdf9-f254-43a0-9c23-299eddc32afe}</Project>
       <Name>Moduware.Platform.Tile.Types</Name>
     </ProjectReference>

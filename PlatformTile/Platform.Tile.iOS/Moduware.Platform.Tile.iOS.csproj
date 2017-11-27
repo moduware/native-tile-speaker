@@ -118,7 +118,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Moduware.Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
+    <ProjectReference Include="..\Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
       <Project>{9D5ABDF9-F254-43A0-9C23-299EDDC32AFE}</Project>
       <Name>Moduware.Platform.Tile.Types</Name>
     </ProjectReference>
