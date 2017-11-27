@@ -11,6 +11,8 @@ using Moduware.Platform.Core.CommonTypes;
 using Moduware.Platform.Core.EventArguments;
 using System.Collections.Generic;
 using Moduware.Tile.Speaker.Shared;
+using Plugin.BLE.Abstractions.Contracts;
+using Android.Bluetooth;
 
 namespace Moduware.Tile.Speaker.Droid
 {
@@ -108,6 +110,28 @@ namespace Moduware.Tile.Speaker.Droid
         private void CoreConfigurationApplied(object sender, EventArgs e)
         {
             _speaker.RequestStatus();
+        }
+
+        public void SetSpeakerDefaultState(bool active)
+        {
+            _defaultSwitch.Checked = active;
+        }
+
+        public void PairToBluetoothDevice(string name)
+        {
+            var adapter = CrossBluetoothLE.Current.Adapter;
+            adapter.StartScanningForDevicesAsync(deviceFilter: (device) =>
+            {
+                if (device.Name == name)
+                {
+                    adapter.StopScanningForDevicesAsync();
+                    // Pairing device
+                    ((BluetoothDevice)device.NativeDevice).CreateBond();
+
+                    return true;
+                }
+                return false;
+            });
         }
     }
 }
