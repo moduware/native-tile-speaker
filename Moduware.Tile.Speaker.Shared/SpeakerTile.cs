@@ -103,6 +103,17 @@ namespace Moduware.Tile.Speaker.Shared
             _core.API.Module.SendCommand(_targetModuleUuid, "AskBluetoothName", new int[] { });
         }
 
+        public void ChangeSpeakerDefaultState(bool active)
+        {
+            if(active)
+            {
+                _core.API.Module.SendCommand(_targetModuleUuid, "SetDefaultStateAsOn", new int[] { });
+            } else
+            {
+                _core.API.Module.SendCommand(_targetModuleUuid, "SetDefaultStateAsOff", new int[] { });
+            }
+        }
+
         private void ModuleDataReceivedHandler(object sender, DriverParseResultEventArgs e)
         {
             var targetModuleUuid = _moduleSearchFunc(_targetModuleTypes);
