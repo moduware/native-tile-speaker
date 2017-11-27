@@ -13,6 +13,7 @@ namespace Moduware.Tile.Speaker.Shared
         IUtilities Utilities { get; }
 
         void SetSpeakerButtonState(bool active);
+        void SetSpeakerDefaultState(bool active);
         Uuid GetUuidOfTargetModuleOrFirstOfType(List<string> list);
         void PairToBluetoothDevice(string name);
 

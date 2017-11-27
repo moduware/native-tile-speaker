@@ -115,9 +115,16 @@ namespace Moduware.Tile.Speaker.Shared
             {
                 RequestStatus();
             }
-            else if (e.DataSource == "StatusRequestResponse" && e.Variables["status"] == "connected")
-            {
-                _nativeMethods.SetSpeakerButtonState(active: true);
+            else if (e.DataSource == "StatusRequestResponse") {
+                if (e.Variables["status"] == "connected")
+                {
+                    _nativeMethods.SetSpeakerButtonState(active: true);
+                }
+                if(_targetModuleType == "moduware.module.speaker")
+                {
+                    var defaultState = e.Variables["defaultState"] == "connected";
+                    _nativeMethods.SetSpeakerDefaultState(defaultState);
+                }
             } else if(e.DataSource == "BluetoothNameRequestResponse")
             {
                 _bluetoothName = e.Variables["bluetoothName"];
