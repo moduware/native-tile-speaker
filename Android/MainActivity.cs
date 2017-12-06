@@ -164,7 +164,7 @@ namespace Moduware.Tile.Speaker.Droid
         /// <summary>
         /// For moduware speaker we need establish secondary Bluetooth connection
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Bluetooth device name</param>
         public void PairToBluetoothDevice(string name)
         {
             var adapter = CrossBluetoothLE.Current.Adapter;
