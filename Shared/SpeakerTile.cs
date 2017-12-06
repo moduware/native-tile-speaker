@@ -3,9 +3,6 @@ using Moduware.Platform.Core.CommonTypes;
 using Moduware.Platform.Core.EventArguments;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Moduware.Tile.Speaker.Shared
 {
@@ -34,22 +31,17 @@ namespace Moduware.Tile.Speaker.Shared
             // After configuration recieved we need find module we want work with
             _nativeMethods.ConfigurationApplied += (o, e) => SetupTargetModule();
             // If module was pulled, we need to check if there are still supported module 
-            _core.API.Module.Pulled += (o, e) =>
-            {
-                SetupTargetModule();
-                _bluetoothName = String.Empty;
-            };
-            _core.API.Gateway.Disconnected += (o, e) =>
-            {
-                SetupTargetModule();
-                _bluetoothName = String.Empty;
-            };
+            _core.API.Module.Pulled += ModuleDisconnectedHandler;
+            _core.API.Gateway.Disconnected += ModuleDisconnectedHandler;
 
             _core.API.Module.DataReceived += ModuleDataReceivedHandler;
-            _core.API.Module.TypeRecognised += (o, e) => RequestStatus();
-            
+            _core.API.Module.TypeRecognised += (o, e) => RequestStatus();   
         }
 
+        /// <summary>
+        /// If there are any supported module plugged in with preference to target module using it,
+        /// if there are no supported modules, showing alert and openning dashboard
+        /// </summary>
         public void SetupTargetModule()
         {
             bool noModule = false;
@@ -78,6 +70,11 @@ namespace Moduware.Tile.Speaker.Shared
             }
         }
 
+#region ModuleMethods
+
+        /// <summary>
+        /// Turn speaker on
+        /// </summary>
         public void TurnOn()
         {
             _core.API.Module.SendCommand(_targetModuleUuid, "Connect", new int[] { });
@@ -87,22 +84,34 @@ namespace Moduware.Tile.Speaker.Shared
             }
         }
 
+        /// <summary>
+        /// Turn speaker off
+        /// </summary>
         public void TurnOff()
         {
             _core.API.Module.SendCommand(_targetModuleUuid, "Disconnect", new int[] { });
         }
 
+        /// <summary>
+        /// Request current status of speaker
+        /// </summary>
         public void RequestStatus()
         {
             _core.API.Module.SendCommand(_targetModuleUuid, "StatusCheck", new int[] { });
         }
 
-        // moduware.module.speaker only
+        /// <summary>
+        /// Ask for bluetooth speaker name, for moduware.module.speaker only
+        /// </summary>
         public void AskBluetoothName()
         {
             _core.API.Module.SendCommand(_targetModuleUuid, "AskBluetoothName", new int[] { });
         }
 
+        /// <summary>
+        /// Configure speaker for another default state
+        /// </summary>
+        /// <param name="active">Default state for speaker</param>
         public void ChangeSpeakerDefaultState(bool active)
         {
             if(active)
@@ -114,6 +123,26 @@ namespace Moduware.Tile.Speaker.Shared
             }
         }
 
+        #endregion
+
+#region ModuleEventHandlers
+
+        /// <summary>
+        /// After module disconnected we need make sure we can continue working
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="e"></param>
+        private void ModuleDisconnectedHandler(Object o, EventArgs e)
+        {
+            SetupTargetModule();
+            _bluetoothName = String.Empty;
+        }
+
+        /// <summary>
+        /// Handle data coming from module
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">Module message parsed using driver</param>
         private void ModuleDataReceivedHandler(object sender, DriverParseResultEventArgs e)
         {
             var targetModuleUuid = _moduleSearchFunc(_targetModuleTypes);
@@ -143,5 +172,8 @@ namespace Moduware.Tile.Speaker.Shared
                 _nativeMethods.PairToBluetoothDevice(_bluetoothName);
             }
         }
+
+#endregion
+
     }
 }
