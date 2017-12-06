@@ -105,7 +105,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PlatformTile\Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
+    <ProjectReference Include="..\platform-tile\Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
       <Project>{9d5abdf9-f254-43a0-9c23-299eddc32afe}</Project>
       <Name>Moduware.Platform.Tile.Types</Name>
     </ProjectReference>

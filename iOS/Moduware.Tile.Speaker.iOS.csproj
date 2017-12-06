@@ -200,7 +200,7 @@
     <Content Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PlatformTile\Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
+    <ProjectReference Include="..\platform-tile\Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj">
       <Project>{9d5abdf9-f254-43a0-9c23-299eddc32afe}</Project>
       <Name>Moduware.Platform.Tile.Types</Name>
     </ProjectReference>
@@ -208,7 +208,7 @@
       <Project>{03cbd247-a243-456c-8df6-7c03d70edcc9}</Project>
       <Name>Moduware.Tile.Speaker.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PlatformTile\Platform.Tile.iOS\Moduware.Platform.Tile.iOS.csproj">
+    <ProjectReference Include="..\platform-tile\Platform.Tile.iOS\Moduware.Platform.Tile.iOS.csproj">
       <Project>{4a938ed6-42cd-4b66-b950-5efbe7b3dc3b}</Project>
       <Name>Moduware.Platform.Tile.iOS</Name>
       <IsAppExtension>false</IsAppExtension>

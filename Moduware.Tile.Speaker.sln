@@ -7,23 +7,23 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moduware.Tile.Speaker.Droid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moduware.Tile.Speaker.iOS", "iOS\Moduware.Tile.Speaker.iOS.csproj", "{CC6CCA50-4C6E-4E2B-AD04-A54340F8C6E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moduware.Platform.Tile.Droid", "PlatformTile\Platform.Tile.Droid\Moduware.Platform.Tile.Droid.csproj", "{55AE2DB5-8F3C-4AF2-819C-396850A05222}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moduware.Platform.Tile.Droid", "platform-tile\Platform.Tile.Droid\Moduware.Platform.Tile.Droid.csproj", "{55AE2DB5-8F3C-4AF2-819C-396850A05222}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moduware.Platform.Tile.iOS", "PlatformTile\Platform.Tile.iOS\Moduware.Platform.Tile.iOS.csproj", "{4A938ED6-42CD-4B66-B950-5EFBE7B3DC3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moduware.Platform.Tile.iOS", "platform-tile\Platform.Tile.iOS\Moduware.Platform.Tile.iOS.csproj", "{4A938ED6-42CD-4B66-B950-5EFBE7B3DC3B}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Moduware.Platform.Tile.Shared", "PlatformTile\Platform.Tile.Shared\Moduware.Platform.Tile.Shared.shproj", "{9B854B31-630D-4A65-95A6-5366D15E6E3E}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Moduware.Platform.Tile.Shared", "platform-tile\Platform.Tile.Shared\Moduware.Platform.Tile.Shared.shproj", "{9B854B31-630D-4A65-95A6-5366D15E6E3E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PlatformTile", "PlatformTile", "{DFD73DCE-94A8-4BCB-9A4D-CE2984455EC0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moduware.Tile.Speaker.Shared", "Shared\Moduware.Tile.Speaker.Shared.csproj", "{03CBD247-A243-456C-8DF6-7C03D70EDCC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moduware.Platform.Tile.Types", "PlatformTile\Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj", "{9D5ABDF9-F254-43A0-9C23-299EDDC32AFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moduware.Platform.Tile.Types", "platform-tile\Platform.Tile.Types\Moduware.Platform.Tile.Types.csproj", "{9D5ABDF9-F254-43A0-9C23-299EDDC32AFE}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		PlatformTile\Platform.Tile.Shared\Platform.Tile.Shared.projitems*{4a938ed6-42cd-4b66-b950-5efbe7b3dc3b}*SharedItemsImports = 4
-		PlatformTile\Platform.Tile.Shared\Platform.Tile.Shared.projitems*{55ae2db5-8f3c-4af2-819c-396850a05222}*SharedItemsImports = 4
-		PlatformTile\Platform.Tile.Shared\Platform.Tile.Shared.projitems*{9b854b31-630d-4a65-95a6-5366d15e6e3e}*SharedItemsImports = 13
+		platform-tile\Platform.Tile.Shared\Platform.Tile.Shared.projitems*{4a938ed6-42cd-4b66-b950-5efbe7b3dc3b}*SharedItemsImports = 4
+		platform-tile\Platform.Tile.Shared\Platform.Tile.Shared.projitems*{55ae2db5-8f3c-4af2-819c-396850a05222}*SharedItemsImports = 4
+		platform-tile\Platform.Tile.Shared\Platform.Tile.Shared.projitems*{9b854b31-630d-4a65-95a6-5366d15e6e3e}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

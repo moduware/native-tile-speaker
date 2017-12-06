@@ -1,0 +1,4 @@
+[submodule "platform-tile"]
+	path = platform-tile
+	url = https://github.com/moduware/platform-tile.git
+	branch = master
