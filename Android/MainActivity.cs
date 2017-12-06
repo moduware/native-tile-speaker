@@ -47,9 +47,38 @@ namespace Moduware.Tile.Speaker.Droid
             // We need to know when core is ready so we can start listening for data from gateways
             CoreReady += CoreReadyHandler;
             // And we need to know when we are ready to send commands
-            ConfigurationApplied += CoreConfigurationApplied;
+            ConfigurationApplied += CoreConfigurationAppliedHandler;
         }
 
+#region CoreEventHandlers
+
+        /// <summary>
+        /// When core is ready initialising our shared code
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="_e"></param>
+        private void CoreReadyHandler(Object source, EventArgs _e)
+        {
+            _speaker = new SpeakerTile(Core, this);
+        }
+
+        /// <summary>
+        /// When we recieved configuration from main app, requesting speaker status
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CoreConfigurationAppliedHandler(object sender, EventArgs e)
+        {
+            _speaker.RequestStatus();
+        }
+
+        #endregion
+
+#region UiEventListeners
+
+        /// <summary>
+        /// We need listen for clicks on back button, main speaker button and default state switch
+        /// </summary>
         private void SetupUiListeners()
         {
             var backButton = FindViewById<ImageButton>(Resource.Id.back_button);
@@ -62,6 +91,11 @@ namespace Moduware.Tile.Speaker.Droid
             _defaultSwitch.CheckedChange += DefaultSwitchStateCheckedChange;
         }
 
+        /// <summary>
+        /// When default state switch change commanding speaker to change config and switching image accordingly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DefaultSwitchStateCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
             _speaker.ChangeSpeakerDefaultState(e.IsChecked);
@@ -77,19 +111,11 @@ namespace Moduware.Tile.Speaker.Droid
             }
         }
 
-        public void SetSpeakerButtonState(bool active)
-        {
-            _active = active;
-            if (active)
-            {
-                RunOnUiThread(() => _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_on)));
-            }
-            else
-            {
-                RunOnUiThread(() => _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_off)));
-            }
-        }
-
+        /// <summary>
+        /// When main speaker button clicked we need send command to speaker module
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SpeakerButtonClickHandler(object sender, EventArgs e)
         {
             SetSpeakerButtonState(!_active);
@@ -103,21 +129,42 @@ namespace Moduware.Tile.Speaker.Droid
             }
         }
 
-        private void CoreReadyHandler(Object source, EventArgs _e)
-        {
-            _speaker = new SpeakerTile(Core, this);
-        }
+        #endregion
 
-        private void CoreConfigurationApplied(object sender, EventArgs e)
-        {
-            _speaker.RequestStatus();
-        }
+#region UiMethods
 
+        /// <summary>
+        /// Change state of main speaker button in UI
+        /// </summary>
+        /// <param name="active"></param>
+        public void SetSpeakerButtonState(bool active)
+        {
+            _active = active;
+            if (active)
+            {
+                RunOnUiThread(() => _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_on)));
+            }
+            else
+            {
+                RunOnUiThread(() => _speakerButton.SetImageDrawable(GetDrawable(Resource.Drawable.speaker_button_off)));
+            }
+        }
+        
+        /// <summary>
+        /// Change state of default speaker state switch
+        /// </summary>
+        /// <param name="active"></param>
         public void SetSpeakerDefaultState(bool active)
         {
             _defaultSwitch.Checked = active;
         }
 
+        #endregion
+
+        /// <summary>
+        /// For moduware speaker we need establish secondary Bluetooth connection
+        /// </summary>
+        /// <param name="name"></param>
         public void PairToBluetoothDevice(string name)
         {
             var adapter = CrossBluetoothLE.Current.Adapter;
