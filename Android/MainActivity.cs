@@ -69,6 +69,7 @@ namespace Moduware.Tile.Speaker.Droid
         /// <param name="e"></param>
         private void CoreConfigurationAppliedHandler(object sender, EventArgs e)
         {
+            _speaker.SetupTargetModule();
             _speaker.RequestStatus();
         }
 
@@ -99,16 +100,20 @@ namespace Moduware.Tile.Speaker.Droid
         private void DefaultSwitchStateCheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
         {
             _speaker.ChangeSpeakerDefaultState(e.IsChecked);
-            if (e.IsChecked)
+            RunOnUiThread(() =>
             {
-                _defaultSwitch.TrackDrawable = GetDrawable(Resource.Mipmap.track_active);
-                _defaultSwitch.ThumbDrawable = GetDrawable(Resource.Mipmap.thumb_active);
-            }
-            else
-            {
-                _defaultSwitch.TrackDrawable = GetDrawable(Resource.Mipmap.track);
-                _defaultSwitch.ThumbDrawable = GetDrawable(Resource.Mipmap.knob);
-            }
+                if (e.IsChecked)
+                {
+                    _defaultSwitch.TrackDrawable = GetDrawable(Resource.Mipmap.track_active);
+                    _defaultSwitch.ThumbDrawable = GetDrawable(Resource.Mipmap.thumb_active);
+                }
+                else
+                {
+                    _defaultSwitch.TrackDrawable = GetDrawable(Resource.Mipmap.track);
+                    _defaultSwitch.ThumbDrawable = GetDrawable(Resource.Mipmap.knob);
+                }
+            });
+            
         }
 
         /// <summary>
@@ -156,7 +161,7 @@ namespace Moduware.Tile.Speaker.Droid
         /// <param name="active"></param>
         public void SetSpeakerDefaultState(bool active)
         {
-            _defaultSwitch.Checked = active;
+            RunOnUiThread(() => _defaultSwitch.Checked = active);
         }
 
         #endregion

@@ -26,6 +26,8 @@ namespace Moduware.Tile.Speaker.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::PCLStorage.Resource.String.ApplicationName = global::Moduware.Tile.Speaker.Droid.Resource.String.ApplicationName;
+			global::PCLStorage.Resource.String.Hello = global::Moduware.Tile.Speaker.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Animation
@@ -2438,6 +2440,12 @@ namespace Moduware.Tile.Speaker.Droid
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f060022
+			public const int ApplicationName = 2131099682;
+			
+			// aapt resource value: 0x7f060021
+			public const int Hello = 2131099681;
+			
 			// aapt resource value: 0x7f060000
 			public const int abc_action_bar_home_description = 2131099648;
 			
@@ -2531,8 +2539,8 @@ namespace Moduware.Tile.Speaker.Droid
 			// aapt resource value: 0x7f060012
 			public const int abc_toolbar_collapse_description = 2131099666;
 			
-			// aapt resource value: 0x7f060021
-			public const int app_name = 2131099681;
+			// aapt resource value: 0x7f060023
+			public const int app_name = 2131099683;
 			
 			// aapt resource value: 0x7f060013
 			public const int search_menu_title = 2131099667;
